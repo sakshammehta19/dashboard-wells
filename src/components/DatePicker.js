@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import Table from './Table';
 
 export default function DatePicker() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [startTime, setStartTime] = useState('');
+    const [endTime, setEndTime] = useState('');
+
     const [tableData, setTableData] = useState([]);
 
     const handleStartDateChange = (e) => {
@@ -12,6 +16,15 @@ export default function DatePicker() {
     const handleEndDateChange = (e) => {
         setEndDate(e.target.value);
     };
+
+    const handleStartTimeChange = (e) => {
+        setStartTime(e.target.value);
+    };
+
+    const handleEndTimeChange = (e) => {
+        setEndTime(e.target.value);
+    };
+
 
     const handleSubmit = () => {
         // Here, you can implement logic to fetch and display data based on the date range.
@@ -23,39 +36,61 @@ export default function DatePicker() {
         ];
 
         setTableData(sampleData);
+
+
     };
 
     return (
-        <div className="container mt-4">
-            <div className="row">
-                <div className="col-md-6 offset-md-3">
-                    <h2 className="mb-4 text-center">Enter Date Range</h2>
-                    <div className="form-group">
-                        <label htmlFor="startDate" className="mr-2" >Start Date:</label>
-                        <input
-                            type="date"
-                            id="startDate"
-                            className="form-control"
-                            value={startDate}
-                            onChange={handleStartDateChange}
-                        />
+        <>
+            <div className="container mt-4">
+                <div className="row">
+                    <div className="col-md-6 offset-md-3">
+                        <p className="text-center mb-3" >Enter Date Range:</p>
+                        <div className="d-flex justify-content-center bd-highlight mb-3">
+                            <label className="mx-2" htmlFor="startDate"  >Start Date:</label>
+                            <input
+                                type="date"
+                                id="startDate"
+                                className="form-control mx-1"
+                                value={startDate}
+                                onChange={handleStartDateChange}
+                            />
+                            <input
+                                type="time"
+                                id="startTime"
+                                className="form-control mx-1"
+                                value={startTime}
+                                onChange={handleStartTimeChange}
+                            />
+                        </div>
+                        <div className="d-flex justify-content-center bd-highlight mb-3" >
+                            <label className="mx-2" htmlFor="endDate" >End Date:</label>
+                            <input
+                                type="date"
+                                id="endDate"
+                                className="form-control mx-1"
+                                value={endDate}
+                                onChange={handleEndDateChange}
+                            />
+                            <input
+                                type="time"
+                                id="endTime"
+                                className="form-control mx-1"
+                                value={endTime}
+                                onChange={handleEndTimeChange}
+                            />
+                            <br />
+                        </div>
+                        <button
+                            className="btn btn-primary btn-block mt-10"
+                            onClick={handleSubmit}
+                        >
+                            Submit
+                        </button>
+
                     </div>
-                    <div className="form-group" >
-                        <label htmlFor="endDate" >End Date:</label>
-                        <input
-                            type="date"
-                            id="endDate"
-                            className="form-control mb-2"
-                            value={endDate}
-                            onChange={handleEndDateChange}
-                        />
-                    </div>
-                    <button
-                        className="btn btn-primary btn-block mt-10"
-                        onClick={handleSubmit}
-                    >
-                        Submit
-                    </button>
+
+
 
                     {tableData.length > 0 && (
                         <table className="table mt-4">
@@ -77,6 +112,6 @@ export default function DatePicker() {
                     )}
                 </div>
             </div>
-        </div>
+        </>
     )
 }
