@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Dropdown = ({ options}) => {
+const Dropdown = ({ id,options,payloadData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -10,6 +10,9 @@ const Dropdown = ({ options}) => {
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    if(id==="appDropdown") payloadData["appNamePD"] = option;
+    else payloadData["moduleNamePD"] = option;
+    console.log(payloadData);
     setIsOpen(false);
   };
 
@@ -19,7 +22,7 @@ const Dropdown = ({ options}) => {
         {selectedOption ? selectedOption : 'Select an option'}
       </button>
       {isOpen && (
-        <div className="dropdown-menu" style={{ display: 'block' }}>
+        <div className="dropdown-menu" style={{ "display": 'block', "width":'80px' }}>
           {options.map((option, index) => (
             <button
               key={index}
@@ -31,7 +34,6 @@ const Dropdown = ({ options}) => {
           ))}
         </div>
       )}
-      {/* <p>Selected option: {selectedOption}</p> */}
     </div>
   );
 };

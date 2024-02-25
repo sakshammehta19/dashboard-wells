@@ -1,117 +1,72 @@
 import React, { useState } from 'react'
-import Table from './Table';
 
-export default function DatePicker() {
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
+export default function DatePicker({ payloadData }) {
+    const [startDate, setStartDate] = useState(null);
+    const [selectedHour, setSelectedHour] = useState('');
 
-    const [tableData, setTableData] = useState([]);
 
     const handleStartDateChange = (e) => {
         setStartDate(e.target.value);
-    };
-
-    const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
-    };
-
-    const handleStartTimeChange = (e) => {
-        setStartTime(e.target.value);
-    };
-
-    const handleEndTimeChange = (e) => {
-        setEndTime(e.target.value);
+        payloadData["datePD"] = e.target.value;
+        console.log(payloadData);
     };
 
 
-    const handleSubmit = () => {
-        // Here, you can implement logic to fetch and display data based on the date range.
-        // For simplicity, let's just create a sample data array.
-        const sampleData = [
-            { date: '2024-02-01', value: 100 },
-            { date: '2024-02-02', value: 150 },
-            { date: '2024-02-03', value: 120 },
-        ];
-
-        setTableData(sampleData);
-
-
+    const handleHourSelect = (e) => {
+        setSelectedHour(e.target.value);
+        payloadData["hourPD"] = e.target.value;
+        console.log(payloadData);
     };
+
+
+    const hours = ["12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM", "7:00 AM", "8:00 AM","9:00 AM","10:00 AM",
+    "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM","5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM","11:00 PM"];
+
 
     return (
         <>
             <div className="container mt-4">
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
-                        <p className="text-center mb-3" >Enter Date Range:</p>
+                        <p className="h4 text-center mb-3" ><b>Select Date and Time:</b></p>
                         <div className="d-flex justify-content-center bd-highlight mb-3">
-                            <label className="mx-2" htmlFor="startDate"  >Start Date:</label>
                             <input
                                 type="date"
                                 id="startDate"
-                                className="form-control mx-1"
+                                className="form-control mr-3"
                                 value={startDate}
                                 onChange={handleStartDateChange}
                             />
-                            <input
+                            {/* <input
                                 type="time"
                                 id="startTime"
                                 className="form-control mx-1"
                                 value={startTime}
                                 onChange={handleStartTimeChange}
-                            />
+                            /> */}
+                            {/* <label htmlFor="hourPicker">Select Hour:</label>
+                            <select id="hourPicker" value={selectedHour} onChange={handleHourSelect}>
+                                <option value="">Select</option>
+                                {hours.map(hour => (
+                                    <option key={hour} value={hour}>{hour}</option>
+                                ))}
+                            </select> */}
+                            <select className="form-select mx-2" id="startTime" value={selectedHour} onChange={handleHourSelect} aria-label="Default select example" required="">
+                            <option value="">Select hour</option>
+                            {hours.map(hour => (
+                                    <option key={hour} value={hour}>{hour}</option>
+                                ))}
+                            </select>
                         </div>
-                        <div className="d-flex justify-content-center bd-highlight mb-3" >
-                            <label className="mx-2" htmlFor="endDate" >End Date:</label>
-                            <input
-                                type="date"
-                                id="endDate"
-                                className="form-control mx-1"
-                                value={endDate}
-                                onChange={handleEndDateChange}
-                            />
-                            <input
-                                type="time"
-                                id="endTime"
-                                className="form-control mx-1"
-                                value={endTime}
-                                onChange={handleEndTimeChange}
-                            />
-                            <br />
-                        </div>
-                        <button
-                            className="btn btn-primary btn-block mt-10"
-                            onClick={handleSubmit}
-                        >
-                            Submit
-                        </button>
 
                     </div>
 
 
 
-                    {tableData.length > 0 && (
-                        <table className="table mt-4">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {tableData.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.date}</td>
-                                        <td>{item.value}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    )}
+                    
                 </div>
             </div>
         </>
     )
 }
+

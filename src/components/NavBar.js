@@ -2,11 +2,12 @@ import React from 'react'
 
 export default function NavBar() {
     return (
-        <nav className="navbar navbar-dark bg-dark border-bottom border-body" >
+        <nav className="navbar sticky-top border-bottom border-warning border-5" style={{"backgroundColor":"#d71e28", "width":"80"}}>
             <div className="container-fluid">
-                <div className="navbar-brand mx-10" href="/"  >
-                    <img src="https://yt3.googleusercontent.com/ytc/AIf8zZRG3-yXHy_mQJ8zWZlo1G3CUKuYhtTGzpKW6F07Rg=s900-c-k-c0x00ffffff-no-rj" alt="Logo" width="30" height="30" className="d-inline-block align-text-top" />
-                    <span className="addspace">Splunk Anomaly Detection Dashboard</span>
+                <div className="navbar-brand mx-10  " href="/"  >
+                    <img src="https://www17.wellsfargomedia.com/assets/images/rwd/wf_logo_220x23.png" alt="Logo" />
+                    <span className='mx-2 text-warning'> | </span>
+                    <span className="addspace text-light" ><b >Splunk Anomaly Detection Dashboard</b></span>
                 </div>
             </div>
         </nav>

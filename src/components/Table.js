@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Table() {
+function Table({payloadData}) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -24,14 +24,12 @@ function Table() {
 
   return (
     <div>
-      <h2>Table</h2>
-      <table className="table table-bordered">
+      <table className="container table table-bordered mt-4 mb-5">
         <thead>
-          <tr className="table-primary">
+          <tr className='table-danger'>
             <th>Source</th>
             <th>Author</th>
             <th>Title</th>
-            {/* Add more table headers as needed */}
           </tr>
         </thead>
         <tbody className="table-group-divider">
@@ -40,7 +38,6 @@ function Table() {
               <td >{item.source.name}</td>
               <td >{item.author}</td>
               <td >{item.title}</td>
-              {/* Add more table cells as needed */}
             </tr>
           ))}
         </tbody>
